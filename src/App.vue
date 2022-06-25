@@ -1,23 +1,27 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h3>{{ user.age }}</h3>
+    <h2>{{ fullName }}</h2>
+    <h3>{{ age }}</h3>
+    <button @click="newAge">Change Age</button>
+    <div>
+      <input type="text" placeholder="First Name" @input="setFirstName" />
+      <input type="text" placeholder="Last Name" @input="setLastName" />
+    </div>
   </section>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref, computed } from "vue";
 
-const user = reactive({
-  name: 'Taufan',
-  age: 30
-})
+const age = ref(30)
+const firstName = ref('')
+const lastName = ref('')
 
-setTimeout(() => {
-  user.name = 'Taufan Tamvan'
-  // if use ref it should
-  // user.value.name = 'Taufan Tamvan'
-}, 2000);
+const setFirstName = (event) => firstName.value = event.target.value
+const setLastName = (event) => lastName.value = event.target.value
+
+const fullName = computed(() => `${firstName.value} ${lastName.value}`)
+
 </script>
 
 <style>
