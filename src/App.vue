@@ -4,20 +4,36 @@
     <h3>{{ age }}</h3>
     <button @click="newAge">Change Age</button>
     <div>
-      <input type="text" placeholder="First Name" v-model="firstName" />
-      <input type="text" placeholder="Last Name" v-model="lastName" />
+      <input type="text" placeholder="First Name" v-model.lazy="firstName" />
+      <input type="text" placeholder="Last Name" v-model.lazy="lastName" />
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 
 const age = ref(30)
 const firstName = ref('')
 const lastName = ref('')
 
 const fullName = computed(() => `${firstName.value} ${lastName.value}`)
+
+watch(age, ((newValue, oldValue) => {
+  console.log('Old age: ' + oldValue);
+  console.log('New age: ' + newValue);
+}))
+
+watch([firstName, lastName], ((newValues, oldValues) => {
+  console.log('Old first name: ' + oldValues[0]);
+  console.log('New first name: ' + newValues[0]);
+  console.log('Old last name: ' + oldValues[1]);
+  console.log('New last name: ' + newValues[1]);
+}))
+
+function newAge() {
+return age.value = 33;
+}
 
 </script>
 
