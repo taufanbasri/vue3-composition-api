@@ -5,7 +5,8 @@
     <button @click="newAge">Change Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model.lazy="firstName" />
-      <input type="text" placeholder="Last Name" v-model.lazy="lastName" />
+      <input type="text" placeholder="Last Name" ref="lastNameInput" />
+      <button @click="setLastName">Set Last Name</button>
     </div>
   </section>
 </template>
@@ -15,6 +16,7 @@ import { ref, computed, watch } from "vue";
 
 const age = ref(30)
 const firstName = ref('')
+const lastNameInput = ref(null)
 const lastName = ref('')
 
 const fullName = computed(() => `${firstName.value} ${lastName.value}`)
@@ -32,7 +34,11 @@ watch([firstName, lastName], ((newValues, oldValues) => {
 }))
 
 function newAge() {
-return age.value = 33;
+  return age.value = 33;
+}
+
+function setLastName() {
+  return lastName.value = lastNameInput.value.value
 }
 
 </script>
