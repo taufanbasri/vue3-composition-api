@@ -6,13 +6,14 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from "vue";
+import { defineProps, computed, inject } from "vue";
 
 const props = defineProps({
   firstName: String,
-  lastName: String,
-  age: Number
+  lastName: String
 })
+
+const age = inject('age')
 
 const userName = computed(() => `${props.firstName} ${props.lastName}`)
 </script>
